@@ -1,0 +1,2 @@
+Error: There is syntax error(s).
+"begin" is expected instead of "x" at 7:7.

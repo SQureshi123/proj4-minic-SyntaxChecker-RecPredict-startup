@@ -1,0 +1,11 @@
+Success: no syntax error is found.
+
+Following is the indentation-updated source code:
+=================================================
+func main::bool()
+begin
+    var x::num[];
+    x := 1 + 2 * 3;
+    print 1.2 - 2.3 / 3.4;
+    return ( true and false or 123 );
+end

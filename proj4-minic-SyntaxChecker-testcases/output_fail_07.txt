@@ -1,0 +1,2 @@
+Error: There is syntax error(s).
+No matching production in type_spec at 8:16.

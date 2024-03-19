@@ -1,0 +1,10 @@
+func main :: bool ()
+begin
+    var x :: num ;
+    x := x + 1 ;
+    x := 0 - ( x + 1 ) * 2;
+    x := x . size and y;
+    x := x [ x + 1 ];
+    x := new num [ x.size ];
+    var x :: num ;
+end

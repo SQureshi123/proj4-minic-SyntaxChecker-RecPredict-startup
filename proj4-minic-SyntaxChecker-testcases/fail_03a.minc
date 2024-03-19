@@ -1,0 +1,7 @@
+func main :: bool ()
+begin
+    var x :: num[] ;
+    x := 1 + 2 * 3 and ;
+    print 1.2 - 2.3 / 3.4 ;
+    return ( true and false or 123 ) ;
+end

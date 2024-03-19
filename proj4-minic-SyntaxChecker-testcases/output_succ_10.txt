@@ -1,0 +1,78 @@
+Success: no syntax error is found.
+
+Following is the indentation-updated source code:
+=================================================
+func main::num()
+begin
+    var x::num;
+    var x::num;
+    x := main2(  );
+    begin
+        var x::num;
+        var x::num;
+        x := 1 + 2 + 3;
+        begin
+            var x::num;
+            var x::num;
+            x := 1 + 2 + 3;
+        end
+        x := 1 + 2 + 3;
+        begin
+            var x::num;
+            var x::num;
+            x := 1 + 2 + 3;
+            while ( 1.23 ) begin
+                if ( a + b ) then
+                    x := 1 + 2 + 3;
+                    if ( a + b ) then
+                        x := 1 + 2 + 3;
+                        while ( 1.23 ) begin
+                            x := 1 + 2 + 3;
+                        end
+                        x := 1 + 2 + 3;
+                    else
+                        x := 1 + 2 + 3;
+                    end
+                    x := 1 + 2 + 3;
+                else
+                    x := 1 + 2 + 3;
+                    if ( a + b ) then
+                        x := 1 + 2 + 3;
+                    else
+                        x := 1 + 2 + 3;
+                        while ( 1.23 ) begin
+                            x := 1 + 2 + 3;
+                        end
+                        x := 1 + 2 + 3;
+                    end
+                    x := 1 + 2 + 3;
+                end
+                x := 1 + 2 + 3;
+                while ( 1.23 ) begin
+                    x := 1 + 2 + 3;
+                end
+                x := 1 + 2 + 3;
+                while ( 1.23 ) begin
+                    x := 1 + 2 + 3;
+                end
+                x := 1 + 2 + 3;
+            end
+            x := 1 + 2 + 3;
+        end
+        x := 1 + 2 + 3;
+    end
+    x := 1 + 2 + 3;
+end
+
+func main2::void(a::num)
+begin
+    return ( 1 );
+end
+
+func main3::void(a::num, b::void)
+begin
+end
+
+func main4::void(a::num, b::void, b::bool)
+begin
+end

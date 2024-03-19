@@ -1,0 +1,14 @@
+func main :: num (  ) 
+begin
+    var x::num  ;
+      var y::num  ;
+    x := x + 1 ;
+    while ( 1  = 2 ) 
+      x := x + 1 ;
+      x := ( x + 1 ) * 2;
+      x := x . size and y;
+      x := x [ x + 1 ];
+      x := new num [ x.size ];
+    end
+    x := ( x + 1 ) * 2;
+end

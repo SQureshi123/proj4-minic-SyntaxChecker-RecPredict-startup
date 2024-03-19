@@ -1,0 +1,9 @@
+func main :: num (  ) 
+begin
+    var x::num  ;
+      x := myfunc();
+    x := myfunc( 1 );
+    x := myfunc( 1, 2 );
+    x := myfunc( 1, 2+x );
+    x := myfunc( 1, 2+x, (x.size + 10)*3.14 );
+end

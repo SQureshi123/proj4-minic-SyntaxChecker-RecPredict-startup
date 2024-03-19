@@ -1,0 +1,14 @@
+func main :: num (  ) 
+begin
+    var x::num  ;
+            var x::num  ;
+    x := main2();
+    begin
+        var x::num  ;
+        var x::num  ;
+        x := 1 + 2 + 3;
+        x := 1 + 2 + 3;
+        end
+    end
+    x := 1 + 2 + 3;
+end

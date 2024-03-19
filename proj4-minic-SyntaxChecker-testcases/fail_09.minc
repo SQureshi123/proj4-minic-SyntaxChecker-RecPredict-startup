@@ -1,0 +1,26 @@
+func myfunc :: void ( ) 
+begin
+  return (1);
+end
+
+func myfunc :: void ( a::num ) 
+begin
+end
+
+func myfunc :: void ( a::num , b::void,, ) 
+begin
+end
+
+func myfunc :: void ( a::num , b::void , b::bool ) 
+begin
+end
+
+func main :: num (  ) 
+begin
+    var x::num  ;
+      x := myfunc();
+    x := myfunc( 1 );
+    x := myfunc( 1, 2 );
+    x := myfunc( 1, 2+x );
+    x := myfunc( 1, 2+x, (x.size + 10)*3.14 );
+end
