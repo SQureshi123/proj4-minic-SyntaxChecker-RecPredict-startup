@@ -19,6 +19,24 @@ public class Parser
     public static final int NUM_LIT     = 21;
     public static final int IDENT       = 22;
     public static final int FUNC        = 23;
+    public static final int VAR         = 24;
+    public static final int RETURN      = 25;
+    public static final int PRINT       = 26;
+    public static final int IF          = 27;
+    public static final int THEN        = 28;
+    public static final int ELSE        = 29;
+    public static final int WHILE       = 30;
+    public static final int LBRACKET    = 31;
+    public static final int RBRACKET    = 32;
+    public static final int VOID        = 33;
+    public static final int BOOL        = 34;
+    public static final int NEW         = 35;
+    public static final int SIZE        = 36;
+    public static final int RELOP       = 37;
+    public static final int COMMA       = 38;
+    public static final int DOT         = 39;
+    public static final int BOOL_LIT    = 40;
+
 
     public class Token
     {
