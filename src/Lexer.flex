@@ -25,6 +25,22 @@
     this.lineno = 1;
     this.column = 1;
   }
+   public void update_col() {
+      String s = yytext();
+      column += s.length();
+    }
+
+    public void update_line_and_col() {
+      String s = yytext();
+      for (int i = 0; i < s.length(); i++) {
+        char c = s.charAt(i);
+        if (c == '\n') {
+          column = 1;
+          lineno += 1;
+        }
+        column++;
+      }
+    }
 %}
 
 num          = [0-9]+("."[0-9]+)?
@@ -78,8 +94,8 @@ blockcomment = "/*"[^]*"*/"
 {num}                               { parser.yylval = new ParserVal((Object)yytext()); return Parser.NUM_LIT; }
 {newline}                           { System.out.println(); lineno++; column = 1;}
 {whitespace}                        { System.out.print(" "); column++; }
-{linecomment}                       { /* skip */ }
-{blockcomment}                      { /* skip */ }
+{linecomment}                       {  update_col(); /* skip */  }
+{blockcomment}                      { update_line_and_col(); /* skip */}
 
 
 \b     { System.err.println("Sorry, backspace doesn't work"); }
