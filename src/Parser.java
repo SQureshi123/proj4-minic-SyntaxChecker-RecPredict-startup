@@ -236,4 +236,33 @@ public class Parser
         }
         throw new Exception("error");
     }
+
+    public List<ParseTree.TypeSpec_> type_spec_() throws Exception {
+        switch (_token.type) {
+            case RPAREN:
+                return new ArrayList<ParseTree.TypeSpec_>();
+            case LBRACKET:
+                Match(LBRACKET);
+                Match(RBRACKET);
+                return new ArrayList<ParseTree.TypeSpec_>();
+        }
+        throw new Exception("error");
+    }
+
+    public ParseTree.StmtWhile while_stmt() throws Exception {
+        switch (_token.type) {
+            case WHILE:
+                Match(WHILE);
+                Match(LPAREN);
+                ParseTree.Expr condition = expr();
+                Match(RPAREN);
+                Match(BEGIN);
+                List<ParseTree.Stmt> stmt_list = stmt_list();
+                Match(END);
+                return new ParseTree.StmtWhile(conditon, stmt_list);
+        }
+        throw new Exception("error");
+    }
+
+
 }
