@@ -470,11 +470,23 @@ public class Parser
             ParseTree.FactorParen paren =  new ParseTree.FactorParen(expr);
             Match(RPAREN);
             return paren;
-        } else if (_token.type == IDENT) {
-            String v = _token.attr.obj.toString();
+        } else if (_token.type == LBRACKET) {
+            Match(LBRACKET);
+            ParseTree.Expr expr = expr();
+            ParseTree.FactorParen bracket = new ParseTree.FactorParen(expr);
+            Match(RBRACKET);
+            return bracket;
+        }
+
+        //factor -> IDENT factor'
+        else if (_token.type == IDENT) {
+            String id = _token.attr.obj.toString();
             Match(IDENT);
-            return new ParseTree.FactorIdentExt(v);    //FIX IT!
-        } else if (_token.type == NUM_LIT) {
+
+           // ParseTree.FactorIdentExt ident = ident();
+           // return new ParseTree.FactorIdentExt(id,ident);    //FIX IT!
+        }
+        else if (_token.type == NUM_LIT) {
             String v = _token.attr.obj.toString();
             Match(NUM_LIT);
             return new ParseTree.FactorNumLit(Integer.parseInt(v));
@@ -494,18 +506,39 @@ public class Parser
         String s = String.format("Incorrect expression at %s.", getPos());
         throw new Exception(s);
 
+
     }
     public ParseTree.Factor  factor_() throws Exception { //need fixing, NOTE: should include LPAREN, RPAREN, LBRACKET,
                                                           //RBRACKET, RELOP, EXPROP, TERMOP, SEMI, COMMA, DOT,
         // factor' -> LPAREN args RPAREN| LBRACKET expr RBRACKET
         //               | DOT SIZE| ϵ
-        switch (_token.type) {
-            case END:
-                //  return args();
+        if (_token.type == LPAREN) {
+            Match(LPAREN);
+            ParseTree.Expr expr = expr();
+            ParseTree.FactorParen paren = new ParseTree.FactorParen(expr);
+            Match(RPAREN);
+            return paren;
+        }
+        else if (_token.type == LBRACKET) {
+            Match(LBRACKET);
+            ParseTree.Expr expr = expr();
+            ParseTree.FactorParen bracket = new ParseTree.FactorParen(expr);
+            Match(RBRACKET);
+            return bracket;
+        }
+        else if (_token.type == DOT) {
+            Match(DOT);
+            Advance();
+            String id = _token.attr.obj.toString();
+            Match(IDENT);
+            //return new ParseTree.FactorIdentExt(id);
+
+        } else if (_token.type == RBRACKET || _token.type == RELOP || _token.type == EXPROP || _token.type == TERMOP || _token.type == SEMI || _token.type == COMMA) {
+            return null;
+
         }
         String s = String.format("Incorrect expression at %s.", getPos());
         throw new Exception(s);
-
 
     }
     public ParseTree.StmtIf if_stmt() throws Exception {
