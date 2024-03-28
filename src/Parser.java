@@ -243,12 +243,14 @@ public class Parser
         switch(_token.type)
         {
             case RPAREN:
+            case IDENT:
                 return new ArrayList<ParseTree.Param>();
         }
         throw new Exception("error");
     }
-    public  ParseTree.LocalDecl local_decl() throws Exception {
+    public ParseTree.LocalDecl local_decl() throws Exception { //MAYBE NEEDS SWITCH
         //    local_decl -> VAR IDENT TYPEOF type_spec SEMI
+
         Match(VAR);
         Match(IDENT);
         Match(TYPEOF);
@@ -280,7 +282,14 @@ public class Parser
         // local_decls' -> eps
         switch(_token.type)
         {
+            case VAR:
+            case BEGIN:
             case END:
+            case RETURN:
+            case PRINT:
+            case IF:
+            case WHILE:
+            case IDENT:
                 return new ArrayList<ParseTree.LocalDecl>();
         }
         throw new Exception("error");
@@ -308,16 +317,81 @@ public class Parser
         //   stmt_list' -> eps
         switch(_token.type)
         {
+            case BEGIN:
+            case RETURN:
+            case PRINT:
+            case IF:
+            case WHILE:
+            {
+                ParseTree.Stmt stmt = stmt();
+                List<ParseTree.Stmt> stmtList = stmt_list_();
+                stmtList.add(0, stmt);
+                return stmtList;
+            }
             case END:
+            case ELSE:
                 return new ArrayList<ParseTree.Stmt>();
+            default:
+                String s = String.format("Incorrect statement at %s.",_token.type);
+                throw new Exception(s);
         }
-        throw new Exception("error");
+    }
+
+    public ParseTree.Term term() throws Exception {
+        // term -> factor term_
+        ParseTree.Factor factor = factor();
+        ParseTree.Term_ term_ = term_();
+        return new ParseTree.Term(factor, term_);
+    }
+
+    public ParseTree.Term_ term_() throws Exception {
+        // term' -> TERMOP factor term' | ϵ
+        if (_token.type == TERMOP) {
+            String op = _token.attr.obj.toString();
+            Advance();
+            ParseTree.Factor factor = factor();
+            ParseTree.Term_ term_ = term_();
+            return new ParseTree.Term_(op, factor, term_);
+        } else if (_token.type == EXPROP || _token.type == RELOP ||
+                _token.type == SEMI || _token.type == COMMA ||
+                _token.type == RPAREN || _token.type == RBRACKET ||
+                _token.type == END) {
+            return null;
+        } else {
+            String s = String.format("Incorrect expression at %s", getPos());
+            throw new Exception(s);
+        }
+    }
+
+    public List<ParseTree.Arg> arg_list() throws Exception {
+        /*switch (_token.type) { //MIGHT NEED SWITCH STATEMENT, IDK
+            case LPAREN:
+            case NUM:
+            case IDENT:
+            case BOOL_LIT:
+            case NUM_LIT:
+
+
+        }*/
+        List<ParseTree.Arg> args = new ArrayList<>();
+
+        ParseTree.Expr firstArg = expr();
+        args.add(new ParseTree.Arg(firstArg));
+
+        List<ParseTree.Arg> remainingArgs = arg_list_();
+        args.addAll(remainingArgs);
     }
 
     public List<ParseTree.Arg> arg_list_() throws Exception {
         //arg_list' -> COMMA expr arg_list | eps
         switch (_token.type) {
-            case END:
+            case COMMA:
+                Match(COMMA);
+                ParseTree.Expr expr = expr();
+                List<ParseTree.Arg> argList = arg_list_();
+                argList.add(0, new ParseTree.Arg(expr));
+                return argList;
+            case RPAREN:
                 return arg_list_();
         }
         String s = String.format("Incorrect expression at %s.", getPos());
@@ -377,7 +451,7 @@ public class Parser
             ParseTree.Term term = term();
             ParseTree.Expr_ expr_ = expr_();
             return new ParseTree.Expr_(op, term, expr_);
-        } else if (_token.type == COMMA || _token.type ==SEMI || _token.type == RBRACKET || _token.type == RPAREN || _token.type == SEMI) {
+        } else if (_token.type == COMMA || _token.type ==SEMI || _token.type == RBRACKET || _token.type == RPAREN) {
             return null;
         } else {
             String s = String.format("Incorrect expression at %s.", getPos());
@@ -385,7 +459,7 @@ public class Parser
         }
 
     }
-    public ParseTree.Factor factor() throws Exception {
+    public ParseTree.Factor factor() throws Exception {                 //NEEDS TO INCLUDE LEFT BRACKET
         // factor -> IDENT factor'| LPAREN expr RPAREN| NUM_LIT
         //    | BOOL_LIT| NEW prim_type LBRACKET expr RBRACKET
         if (_token.type == LPAREN) {
@@ -419,7 +493,8 @@ public class Parser
         throw new Exception(s);
 
     }
-    public ParseTree.Factor  factor_() throws Exception { //need fixing
+    public ParseTree.Factor  factor_() throws Exception { //need fixing, NOTE: should include LPAREN, RPAREN, LBRACKET,
+                                                          //RBRACKET, RELOP, EXPROP, TERMOP, SEMI, COMMA, DOT,
         // factor' -> LPAREN args RPAREN| LBRACKET expr RBRACKET
         //               | DOT SIZE| ϵ
         switch (_token.type) {
@@ -460,16 +535,37 @@ public class Parser
             throw new Exception("error");
     }
     public ParseTree.StmtPrint print_stmt() throws Exception {
-        Match(PRINT);
-        ParseTree.Expr expr = expr();
-        Match(SEMI);
-        return new ParseTree.StmtPrint(expr);
+        if (_token.type == PRINT) {
+            Match(PRINT);
+            ParseTree.Expr expr = expr();
+            Match(SEMI);
+            return new ParseTree.StmtPrint(expr);
+        } else {
+            throw new Exception("error");
+        }
     }
+
+    /*public ParseTree.Program program() throws Exception { //DUPLICATE CASE
+        switch (_token.type) {
+            case FUNC:
+            case ENDMARKER:
+                List<ParseTree.FuncDecl> funcs = decl_list();
+                Match(ENDMARKER);
+                return new ParseTree.Program(funcs);
+            default:
+                throw new Exception("error");
+        }
+    }*/
+
     public ParseTree.StmtReturn return_stmt() throws Exception {
-        Match(RETURN);
-        ParseTree.Expr expr = expr();
-        Match(SEMI);
-        return new ParseTree.StmtReturn(expr);
+        if (_token.type == RETURN) {
+            Match(RETURN);
+            ParseTree.Expr expr = expr();
+            Match(SEMI);
+            return new ParseTree.StmtReturn(expr);
+        } else {
+            throw new Exception("error");
+        }
     }
     public ParseTree.Param param() throws Exception {
 
@@ -480,9 +576,45 @@ public class Parser
         }
     }
 
+    public List<ParseTree.Param> param_list() throws Exception {
+        List<ParseTree.Param> params = new ArrayList<>();
+
+        ParseTree.Param firstParam = param();
+        params.add(firstParam);
+
+        List<ParseTree.Param> remainingParams = param_list_();
+        params.addAll(remainingParams);
+
+        return params;
+    }
+
+    public List<ParseTree.Param> param_list_() throws Exception {
+        switch (_token.type) {
+            case COMMA:
+                Match(COMMA);
+                ParseTree.Param param = param();
+                List<ParseTree.Param> paramList = param_list_();
+                paramList.add(0, param);
+                return paramList;
+            case RPAREN:
+                return param_list_();
+        }
+        String s = String.format("Incorrect parameter list at %s", getPos());
+        throw new Exception(s);
+
+    }
+
+    public ParseTree.TypeSpec type_spec() throws Exception {
+        ParseTree.PrimType primType = prim_type();
+        ParseTree.TypeSpec_ typeSpec_ = type_spec_();
+        return new ParseTree.TypeSpec(primType, typeSpec_);
+    }
+
     public List<ParseTree.TypeSpec_> type_spec_() throws Exception {
         switch (_token.type) {
             case RPAREN:
+            case SEMI:
+            case COMMA:
                 return new ArrayList<ParseTree.TypeSpec_>();
             case LBRACKET:
                 Match(LBRACKET);
@@ -506,6 +638,4 @@ public class Parser
         }
         throw new Exception("error");
     }
-
-
 }
