@@ -326,25 +326,33 @@ public class Parser
 
     }
     public List<ParseTree.Arg> args() throws Exception {
-        //arg_list' -> arg_list | eps
-        switch (_token.type) {
-            case END:
-                return args();
+        LinkedList<ParseTree.Arg> args = new LinkedList<>();
+        if (_token.type == RPAREN)
+            return args;
+
+        while (true) {
+            args.add(new ParseTree.Arg(expr()));
+            if (_token.type == COMMA)
+                Advance();
+            else if (_token.type == RPAREN)
+                return args;
+            else {
+                String s = String.format("Incorrect argument format at %s.", getPos());
+                throw new Exception(s);
+            }
         }
-        String s = String.format("Incorrect expression at %s.", getPos());
-        throw new Exception(s);
 
 
     }
 
     public ParseTree.StmtAssign assign_stmt() throws Exception {
         //  assign_stmt -> IDENT ASSIGN expr SEMI
-        switch (_token.type) {
-            case END:
-                // return new ParseTree.StmtAssign();
-        }
-        String s = String.format("Incorrect expression at %s.", getPos());
-        throw new Exception(s);
+        String id = _token.attr.obj.toString();
+        Match(IDENT);
+        Match(ASSIGN);
+        ParseTree.Expr expr = expr();
+        Match(SEMI);
+        return new ParseTree.StmtAssign(id, expr);
 
 
     }
@@ -407,17 +415,11 @@ public class Parser
             Match(RBRACKET);
             return new ParseTree.FactorNew(type, expr);
         }
-        else if (_token.type == LBRACKET) {
-            Match(LBRACKET);
-            ParseTree.Expr expr = expr();
-            ParseTree.FactorParen paren =  new ParseTree.FactorParen(expr);
-            Match(RBRACKET);
-        }
         String s = String.format("Incorrect expression at %s.", getPos());
         throw new Exception(s);
 
     }
-    public ParseTree.Factor  factor_() throws Exception {
+    public ParseTree.Factor  factor_() throws Exception { //need fixing
         // factor' -> LPAREN args RPAREN| LBRACKET expr RBRACKET
         //               | DOT SIZE| ϵ
         switch (_token.type) {
