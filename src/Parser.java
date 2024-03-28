@@ -41,34 +41,34 @@ public class Parser
 
     public static String token2string(int t) {
         switch (t) {
-            case FUNC       :  return "\"func\"";
-            case VAR        :  return "\"var\"";
-            case BEGIN      :    return "\"{\"";
-            case END        :      return "\"}\"";
+            case FUNC       : return "\"func\"";
+            case VAR        : return "\"var\"";
+            case BEGIN      : return "\"{\"";
+            case END        : return "\"}\"";
             case RETURN     : return "\"return\"";
             case PRINT      : return "\"print\"";
             case IF         : return "\"if\"";
             case THEN       : return  "\"then\"";
-            case ELSE       :     return "\"else\"";
-            case WHILE      :    return "\"while\"";
-            case LPAREN     :   return "\"(\"";
-            case RPAREN     :   return "\")\"";
-            case LBRACKET   :   return "\"[\"";
-            case RBRACKET   :   return "\"]\"";
-            case VOID       :  return "\"void\"";
-            case NUM        :  return "\"num\"";
+            case ELSE       : return "\"else\"";
+            case WHILE      : return "\"while\"";
+            case LPAREN     : return "\"(\"";
+            case RPAREN     : return "\")\"";
+            case LBRACKET   : return "\"[\"";
+            case RBRACKET   : return "\"]\"";
+            case VOID       : return "\"void\"";
+            case NUM        : return "\"num\"";
             case BOOL       : return "\"bool\"";
             case NEW        : return "\"new\"";
-            case SIZE        : return "\"size\"";
-            case ASSIGN     :   return "\":=\"";
+            case SIZE       : return "\"size\"";
+            case ASSIGN     : return "\":=\"";
             case RELOP      : return "RELOP";
             case EXPROP     : return "EXPROP";
             case TERMOP     : return "TERMOP";
             case TYPEOF     : return "\"::\"";
-            case SEMI       :     return "\";\"";
-            case COMMA      :    return "\",\"";
-            case IDENT      :    return "an identifier";
-            case DOT        :  return "\".\"";
+            case SEMI       : return "\";\"";
+            case COMMA      : return "\",\"";
+            case IDENT      : return "an identifier";
+            case DOT        : return "\".\"";
             case NUM_LIT    : return "an integer";
             case BOOL_LIT   : return "an boolean";
             default         : return "default";
@@ -380,6 +380,8 @@ public class Parser
 
         List<ParseTree.Arg> remainingArgs = arg_list_();
         args.addAll(remainingArgs);
+
+        return args;
     }
 
     public List<ParseTree.Arg> arg_list_() throws Exception {
@@ -512,9 +514,11 @@ public class Parser
         Match(LPAREN);
         ParseTree.Expr expr = expr();
         Match(RPAREN);
-        ParseTree.Stmt stmt1 = stmt();
+        List<ParseTree.Stmt> stmt1 = stmt_list();
         Match(ELSE);
-        ParseTree.Stmt stmt2 = stmt();
+        List<ParseTree.Stmt> stmt2 = stmt_list();
+        Match(END);
+
         return new ParseTree.StmtIf(expr, stmt1, stmt2);
 
     }
@@ -569,10 +573,26 @@ public class Parser
     }
     public ParseTree.Param param() throws Exception {
 
-        if (_token.type == IDENT) {
+        /*if (_token.type == IDENT) {
             String v = _token.attr.obj.toString();
             Match(IDENT);
-            return new ParseTree.FactorIdentExt(v);
+            return new ParseTree.FactorIdentExt(v, null);
+        }
+        return null;*/
+
+        if (_token.type == IDENT) {
+            String identifier = _token.attr.obj.toString();
+            Match(IDENT);
+
+            if (_token.type == TYPEOF) {
+                Match(TYPEOF);
+                ParseTree.TypeSpec typeSpec = type_spec();
+                return new ParseTree.Param(identifier, typeSpec);
+            } else {
+                throw new Exception("Expected 'TYPEOF' after identifier");
+            }
+        } else {
+            throw new Exception("error");
         }
     }
 
@@ -605,8 +625,9 @@ public class Parser
     }
 
     public ParseTree.TypeSpec type_spec() throws Exception {
+        // type_spec -> prim_type type_spec'
         ParseTree.PrimType primType = prim_type();
-        ParseTree.TypeSpec_ typeSpec_ = type_spec_();
+        ParseTree.TypeSpec_ typeSpec_ = (ParseTree.TypeSpec_) type_spec_();
         return new ParseTree.TypeSpec(primType, typeSpec_);
     }
 
@@ -634,7 +655,7 @@ public class Parser
                 Match(BEGIN);
                 List<ParseTree.Stmt> stmt_list = stmt_list();
                 Match(END);
-                return new ParseTree.StmtWhile(conditon, stmt_list);
+                return new ParseTree.StmtWhile(condition, stmt_list);
         }
         throw new Exception("error");
     }
