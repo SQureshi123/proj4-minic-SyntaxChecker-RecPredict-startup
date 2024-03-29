@@ -92,7 +92,7 @@ blockcomment = "/*"[^]*"*/"
 "false"                             { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.BOOL_LIT;}
 {identifier}                        { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.IDENT  ; }
 {num}                               { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.NUM_LIT; }
-{newline}                           { lineno++; column = 1;}
+{newline}                           { lineno++; column = 0;}
 {whitespace}                        { column += yytext().length(); }
 {linecomment}                       {  /* skip */  }
 {blockcomment}                      { /* skip */}

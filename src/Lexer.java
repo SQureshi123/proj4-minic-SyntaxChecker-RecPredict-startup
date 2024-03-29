@@ -696,7 +696,7 @@ class Lexer {
             }
           case 39: break;
           case 5: 
-            { lineno++; column = 1;
+            { lineno++; column = 0;
             }
           case 40: break;
           case 6: 

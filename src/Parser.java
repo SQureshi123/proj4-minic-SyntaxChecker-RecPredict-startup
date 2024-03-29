@@ -363,7 +363,6 @@ public class Parser
 
     public ParseTree.Term_ term_() throws Exception {
         // term' -> TERMOP factor term' | ϵ
-
         switch(_token.type) {
             case TERMOP:
                 String v01 = Match(TERMOP);

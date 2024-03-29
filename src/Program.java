@@ -8,7 +8,7 @@ public class Program
         //+"end\n"
         //);
         //
-          args = new String[] { "proj4-minic-SyntaxChecker-testcases\\fail_06.minc" };
+          args = new String[] { "proj4-minic-SyntaxChecker-testcases\\succ_07.minc" };
 
         if(args.length <= 0)
             return;
