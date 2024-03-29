@@ -37,7 +37,8 @@ public class Parser
     public static final int DOT         = 39;
     public static final int BOOL_LIT    = 40;
 
-    public static String token2string(int t) {
+    private String token2string(int t) {
+        String tokenVal = _token.attr.obj.toString();
         switch (t) {
             case FUNC       : return "\"func\"";
             case VAR        : return "\"var\"";
@@ -59,17 +60,19 @@ public class Parser
             case NEW        : return "\"new\"";
             case SIZE       : return "\"size\"";
             case ASSIGN     : return "\":=\"";
-            case RELOP      : return "RELOP";
-            case EXPROP     : return "EXPROP";
-            case TERMOP     : return "TERMOP";
+            /*case IDENT      :
+            case NUM_LIT    :
+            case BOOL_LIT   :
+            case RELOP      :
+            case EXPROP     :
+            case TERMOP     : return tokenVal;*/
             case TYPEOF     : return "\"::\"";
             case SEMI       : return "\";\"";
             case COMMA      : return "\",\"";
-            case IDENT      : return "an identifier";
             case DOT        : return "\".\"";
-            case NUM_LIT    : return "an integer";
-            case BOOL_LIT   : return "an boolean";
-            default         : return "default";
+/*            case NUM_LIT    : return "an integer";
+            case BOOL_LIT   : return "an boolean";*/
+            default         : return "\"" + tokenVal + "\"";
         }
     }
     public class Token
@@ -112,8 +115,12 @@ public class Parser
         String lexeme = "";
         if(_token.attr != null) lexeme = (String)_token.attr.obj;
 
-        if(!match)                          // if token does not match
-            throw new Exception("token mismatch");  // throw exception (indicating parsing error in this assignment)
+        if(!match) {                    // if token does not match
+            String incorrectToken = token2string(_token.type);
+            String expectedToken = token2string(token_type);
+            throw new Exception(expectedToken + " is expected instead of " + incorrectToken + " at " +
+                    _lexer.lineno + ":" + _lexer.column + ".");
+        }
 
         if(_token.type != ENDMARKER)    // if token is not endmarker,
             Advance();                  // make token point next token in input by calling Advance()
@@ -189,7 +196,7 @@ public class Parser
             case ENDMARKER:
                 return new ArrayList<ParseTree.FuncDecl>();
         }
-        throw new Exception("No matching production in decl_list_ at " + _lexer.lineno + ":" + _lexer.column + ".");
+        throw new Exception("No matching production in decl_list' at " + _lexer.lineno + ":" + _lexer.column + ".");
     }
     public ParseTree.FuncDecl fun_decl() throws Exception
     {
@@ -330,6 +337,7 @@ public class Parser
             case PRINT:
             case IF:
             case WHILE:
+            case IDENT:
                 ParseTree.Stmt v01 = stmt();
                 List<ParseTree.Stmt> v02 = stmt_list_();
                 v02.add(0, v01);
@@ -375,7 +383,7 @@ public class Parser
             case END:
                 return null;
         }
-        throw new Exception("No matching production in term_ at " + _lexer.lineno + ":" + _lexer.column + ".");
+        throw new Exception("No matching production in term' at " + _lexer.lineno + ":" + _lexer.column + ".");
     }
 
     public List<ParseTree.Arg> arg_list() throws Exception {
@@ -408,7 +416,7 @@ public class Parser
             case RPAREN:
                 return new ArrayList<ParseTree.Arg>();
         }
-        throw new Exception("No matching production in arg_list_ at " + _lexer.lineno + ":" + _lexer.column + ".");
+        throw new Exception("No matching production in arg_list' at " + _lexer.lineno + ":" + _lexer.column + ".");
     }
     public List<ParseTree.Arg> args() throws Exception {
 
@@ -485,7 +493,7 @@ public class Parser
             case RPAREN:
                 return null;
         }
-        throw new Exception("No matching production in expr_ at " + _lexer.lineno + ":" + _lexer.column + ".");
+        throw new Exception("No matching production in expr' at " + _lexer.lineno + ":" + _lexer.column + ".");
     }
     public ParseTree.Factor factor() throws Exception {                 //NEEDS TO INCLUDE LEFT BRACKET
         // factor -> IDENT factor'| LPAREN expr RPAREN| NUM_LIT
@@ -518,7 +526,7 @@ public class Parser
         }
         throw new Exception("No matching production in factor at " + _lexer.lineno + ":" + _lexer.column + ".");
     }
-    public ParseTree.FactorIdent_DotSize factor_() throws Exception { //need fixing, NOTE: should include LPAREN, RPAREN, LBRACKET,
+    public ParseTree.Factor_ factor_() throws Exception { //need fixing, NOTE: should include LPAREN, RPAREN, LBRACKET,
                                                           //RBRACKET, RELOP, EXPROP, TERMOP, SEMI, COMMA, DOT,
         // factor' -> LPAREN args RPAREN| LBRACKET expr RBRACKET
         //               | DOT SIZE| ϵ
@@ -547,7 +555,7 @@ public class Parser
             case TERMOP:
                 return new ParseTree.FactorIdent_Eps();
         }
-        throw new Exception("No matching production in factor_ at " + _lexer.lineno + ":" + _lexer.column + ".");
+        throw new Exception("No matching production in factor' at " + _lexer.lineno + ":" + _lexer.column + ".");
 
     }
     public ParseTree.StmtIf if_stmt() throws Exception {
@@ -617,7 +625,7 @@ public class Parser
                 String v01 = Match(IDENT);
                 String v02 = Match(TYPEOF);
                 ParseTree.TypeSpec v03 = type_spec();
-                return new ParseTree.TypeSpec(v01, v03);
+                return new ParseTree.Param(v01, v03);
         }
         throw new Exception("No matching production in param at " + _lexer.lineno + ":" + _lexer.column + ".");
     }
@@ -646,7 +654,7 @@ public class Parser
             case RPAREN:
                 return new ArrayList<ParseTree.Param>();
         }
-        throw new Exception("No matching production in param_list_ at " + _lexer.lineno + ":" + _lexer.column + ".");
+        throw new Exception("No matching production in param_list' at " + _lexer.lineno + ":" + _lexer.column + ".");
     }
 
     public ParseTree.TypeSpec type_spec() throws Exception {
@@ -663,7 +671,7 @@ public class Parser
         throw new Exception("No matching production in type_spec at " + _lexer.lineno + ":" + _lexer.column + ".");
     }
 
-    public List<ParseTree.TypeSpec_> type_spec_() throws Exception {
+    public ParseTree.TypeSpec_ type_spec_() throws Exception {
         switch (_token.type) {
             case RPAREN:
             case SEMI:
@@ -674,7 +682,7 @@ public class Parser
                 String v02 = Match(RBRACKET);
                 return new ParseTree.TypeSpec_Array();
         }
-        throw new Exception("No matching production in type_spec_ at " + _lexer.lineno + ":" + _lexer.column + ".");
+        throw new Exception("No matching production in type_spec' at " + _lexer.lineno + ":" + _lexer.column + ".");
     }
 
     public ParseTree.StmtWhile while_stmt() throws Exception {
