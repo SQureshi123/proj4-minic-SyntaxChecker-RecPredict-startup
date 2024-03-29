@@ -62,14 +62,14 @@ class Lexer {
   private static final String ZZ_ACTION_PACKED_0 =
     "\1\0\1\1\1\2\1\3\1\4\1\5\1\6\2\7"+
     "\14\4\1\10\1\11\1\12\1\13\1\4\1\1\3\14"+
-    "\1\15\1\16\1\17\1\20\1\0\1\21\1\0\13\4"+
-    "\1\22\4\4\1\15\1\23\1\24\1\2\1\0\1\4"+
-    "\1\25\1\26\1\27\1\4\1\7\3\4\1\30\5\4"+
-    "\1\31\1\32\1\33\2\4\1\34\1\35\1\36\1\4"+
-    "\1\37\2\4\1\40\1\41\1\42\1\43";
+    "\1\15\1\16\1\17\1\20\1\0\1\21\1\0\14\4"+
+    "\1\22\5\4\1\15\1\23\1\24\1\2\1\0\2\4"+
+    "\1\25\1\26\1\27\1\4\1\7\3\4\1\30\6\4"+
+    "\1\21\1\31\1\32\2\4\1\33\1\34\1\35\1\36"+
+    "\1\4\1\37\2\4\1\40\1\41\1\42\1\43";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[89];
+    int [] result = new int[94];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -100,15 +100,15 @@ class Lexer {
     "\0\54\0\u0318\0\u0344\0\54\0\u0370\0\u039c\0\54\0\54"+
     "\0\54\0\54\0\u03c8\0\u03f4\0\u0420\0\u044c\0\u0478\0\u04a4"+
     "\0\u04d0\0\u04fc\0\u0528\0\u0554\0\u0580\0\u05ac\0\u05d8\0\u0604"+
-    "\0\204\0\u0630\0\u065c\0\u0688\0\u06b4\0\204\0\54\0\54"+
-    "\0\u03c8\0\u06e0\0\u070c\0\204\0\204\0\204\0\u0738\0\204"+
-    "\0\u0764\0\u0790\0\u07bc\0\204\0\u07e8\0\u0814\0\u0840\0\u086c"+
-    "\0\u0898\0\u0420\0\204\0\204\0\u08c4\0\u08f0\0\204\0\204"+
-    "\0\204\0\u091c\0\204\0\u0948\0\u0974\0\204\0\204\0\204"+
-    "\0\204";
+    "\0\u0630\0\204\0\u065c\0\u0688\0\u06b4\0\u06e0\0\u070c\0\204"+
+    "\0\54\0\54\0\u03c8\0\u0738\0\u0764\0\u0790\0\204\0\204"+
+    "\0\204\0\u07bc\0\204\0\u07e8\0\u0814\0\u0840\0\204\0\u086c"+
+    "\0\u0898\0\u08c4\0\u08f0\0\u091c\0\u0948\0\u0420\0\204\0\204"+
+    "\0\u0974\0\u09a0\0\204\0\204\0\204\0\204\0\u09cc\0\204"+
+    "\0\u09f8\0\u0a24\0\204\0\204\0\204\0\204";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[89];
+    int [] result = new int[94];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -139,66 +139,72 @@ class Lexer {
     "\1\41\1\42\55\0\1\3\1\43\52\0\1\5\1\0"+
     "\2\5\6\0\22\5\4\0\3\5\16\0\1\7\1\0"+
     "\1\7\52\0\1\44\2\0\1\45\42\0\1\5\1\0"+
-    "\2\5\6\0\1\5\1\46\20\5\4\0\3\5\11\0"+
-    "\1\5\1\0\2\5\6\0\1\5\1\47\6\5\1\50"+
-    "\11\5\4\0\3\5\11\0\1\5\1\0\2\5\6\0"+
-    "\5\5\1\51\14\5\4\0\1\52\2\5\11\0\1\5"+
-    "\1\0\2\5\6\0\2\5\1\53\17\5\4\0\3\5"+
-    "\11\0\1\5\1\0\2\5\6\0\10\5\1\54\11\5"+
+    "\2\5\6\0\1\5\1\46\3\5\1\47\14\5\4\0"+
+    "\3\5\11\0\1\5\1\0\2\5\6\0\1\5\1\50"+
+    "\6\5\1\51\11\5\4\0\3\5\11\0\1\5\1\0"+
+    "\2\5\6\0\5\5\1\52\14\5\4\0\1\53\2\5"+
+    "\11\0\1\5\1\0\2\5\6\0\2\5\1\54\17\5"+
     "\4\0\3\5\11\0\1\5\1\0\2\5\6\0\10\5"+
-    "\1\55\11\5\4\0\1\56\2\5\11\0\1\5\1\0"+
-    "\2\5\6\0\2\5\1\57\14\5\1\60\2\5\4\0"+
-    "\3\5\11\0\1\5\1\0\2\5\6\0\1\61\21\5"+
-    "\4\0\3\5\11\0\1\5\1\0\2\5\6\0\16\5"+
-    "\1\62\3\5\4\0\3\5\11\0\1\5\1\0\2\5"+
-    "\6\0\6\5\1\63\13\5\4\0\3\5\11\0\1\5"+
-    "\1\0\2\5\6\0\12\5\1\64\7\5\4\0\3\5"+
-    "\11\0\1\5\1\0\2\5\6\0\16\5\1\65\3\5"+
-    "\4\0\3\5\11\0\1\5\1\0\2\5\6\0\6\5"+
-    "\1\66\13\5\4\0\3\5\54\0\1\67\1\70\53\0"+
-    "\1\34\1\0\1\34\51\0\1\34\7\0\1\71\52\0"+
-    "\5\44\1\0\2\44\2\0\42\44\12\45\1\72\41\45"+
-    "\1\0\1\5\1\0\2\5\6\0\2\5\1\73\17\5"+
-    "\4\0\3\5\11\0\1\5\1\0\2\5\6\0\22\5"+
-    "\4\0\1\5\1\74\1\5\11\0\1\5\1\0\2\5"+
-    "\6\0\21\5\1\75\4\0\3\5\11\0\1\5\1\0"+
-    "\2\5\6\0\6\5\1\76\13\5\4\0\3\5\11\0"+
-    "\1\5\1\0\2\5\6\0\12\5\1\77\7\5\4\0"+
-    "\3\5\11\0\1\5\1\0\2\5\6\0\13\5\1\100"+
-    "\6\5\4\0\3\5\11\0\1\5\1\0\2\5\6\0"+
-    "\14\5\1\101\5\5\4\0\3\5\11\0\1\5\1\0"+
-    "\2\5\6\0\11\5\1\102\10\5\4\0\3\5\11\0"+
-    "\1\5\1\0\2\5\6\0\22\5\4\0\1\103\2\5"+
-    "\11\0\1\5\1\0\2\5\6\0\13\5\1\104\6\5"+
-    "\4\0\3\5\11\0\1\5\1\0\2\5\6\0\20\5"+
-    "\1\105\1\5\4\0\3\5\11\0\1\5\1\0\2\5"+
-    "\6\0\10\5\1\106\11\5\4\0\3\5\11\0\1\5"+
-    "\1\0\2\5\6\0\12\5\1\107\7\5\4\0\3\5"+
-    "\11\0\1\5\1\0\2\5\6\0\22\5\4\0\2\5"+
-    "\1\110\11\0\1\5\1\0\2\5\6\0\12\5\1\111"+
-    "\7\5\4\0\3\5\10\0\7\45\1\112\2\45\1\72"+
-    "\41\45\1\0\1\5\1\0\2\5\6\0\3\5\1\113"+
-    "\16\5\4\0\3\5\11\0\1\5\1\0\2\5\6\0"+
-    "\13\5\1\114\6\5\4\0\3\5\11\0\1\5\1\0"+
-    "\2\5\6\0\1\5\1\115\20\5\4\0\3\5\11\0"+
-    "\1\5\1\0\2\5\6\0\12\5\1\116\7\5\4\0"+
-    "\3\5\11\0\1\5\1\0\2\5\6\0\17\5\1\117"+
+    "\1\55\11\5\4\0\3\5\11\0\1\5\1\0\2\5"+
+    "\6\0\10\5\1\56\11\5\4\0\1\57\2\5\11\0"+
+    "\1\5\1\0\2\5\6\0\2\5\1\60\14\5\1\61"+
     "\2\5\4\0\3\5\11\0\1\5\1\0\2\5\6\0"+
-    "\10\5\1\120\11\5\4\0\3\5\11\0\1\5\1\0"+
-    "\2\5\6\0\2\5\1\121\17\5\4\0\3\5\11\0"+
-    "\1\5\1\0\2\5\6\0\2\5\1\122\17\5\4\0"+
-    "\3\5\11\0\1\5\1\0\2\5\6\0\10\5\1\123"+
-    "\11\5\4\0\3\5\11\0\1\5\1\0\2\5\6\0"+
-    "\17\5\1\124\2\5\4\0\3\5\11\0\1\5\1\0"+
-    "\2\5\6\0\6\5\1\125\13\5\4\0\3\5\11\0"+
-    "\1\5\1\0\2\5\6\0\2\5\1\126\17\5\4\0"+
-    "\3\5\11\0\1\5\1\0\2\5\6\0\14\5\1\127"+
+    "\1\62\21\5\4\0\3\5\11\0\1\5\1\0\2\5"+
+    "\6\0\6\5\1\63\7\5\1\64\3\5\4\0\3\5"+
+    "\11\0\1\5\1\0\2\5\6\0\6\5\1\65\13\5"+
+    "\4\0\3\5\11\0\1\5\1\0\2\5\6\0\12\5"+
+    "\1\66\7\5\4\0\3\5\11\0\1\5\1\0\2\5"+
+    "\6\0\16\5\1\67\3\5\4\0\3\5\11\0\1\5"+
+    "\1\0\2\5\6\0\6\5\1\70\13\5\4\0\3\5"+
+    "\54\0\1\71\1\72\53\0\1\34\1\0\1\34\51\0"+
+    "\1\34\7\0\1\73\52\0\5\44\1\0\2\44\2\0"+
+    "\42\44\12\45\1\74\41\45\1\0\1\5\1\0\2\5"+
+    "\6\0\2\5\1\75\17\5\4\0\3\5\11\0\1\5"+
+    "\1\0\2\5\6\0\17\5\1\76\2\5\4\0\3\5"+
+    "\11\0\1\5\1\0\2\5\6\0\22\5\4\0\1\5"+
+    "\1\77\1\5\11\0\1\5\1\0\2\5\6\0\21\5"+
+    "\1\100\4\0\3\5\11\0\1\5\1\0\2\5\6\0"+
+    "\6\5\1\101\13\5\4\0\3\5\11\0\1\5\1\0"+
+    "\2\5\6\0\12\5\1\102\7\5\4\0\3\5\11\0"+
+    "\1\5\1\0\2\5\6\0\13\5\1\103\6\5\4\0"+
+    "\3\5\11\0\1\5\1\0\2\5\6\0\14\5\1\104"+
     "\5\5\4\0\3\5\11\0\1\5\1\0\2\5\6\0"+
-    "\10\5\1\130\11\5\4\0\3\5\11\0\1\5\1\0"+
-    "\2\5\6\0\2\5\1\131\17\5\4\0\3\5\10\0";
+    "\11\5\1\105\10\5\4\0\3\5\11\0\1\5\1\0"+
+    "\2\5\6\0\22\5\4\0\1\106\2\5\11\0\1\5"+
+    "\1\0\2\5\6\0\13\5\1\107\6\5\4\0\3\5"+
+    "\11\0\1\5\1\0\2\5\6\0\20\5\1\110\1\5"+
+    "\4\0\3\5\11\0\1\5\1\0\2\5\6\0\1\5"+
+    "\1\111\20\5\4\0\3\5\11\0\1\5\1\0\2\5"+
+    "\6\0\10\5\1\112\11\5\4\0\3\5\11\0\1\5"+
+    "\1\0\2\5\6\0\12\5\1\113\7\5\4\0\3\5"+
+    "\11\0\1\5\1\0\2\5\6\0\22\5\4\0\2\5"+
+    "\1\114\11\0\1\5\1\0\2\5\6\0\12\5\1\115"+
+    "\7\5\4\0\3\5\10\0\7\45\1\116\2\45\1\74"+
+    "\41\45\1\0\1\5\1\0\2\5\6\0\3\5\1\117"+
+    "\16\5\4\0\3\5\11\0\1\5\1\0\2\5\6\0"+
+    "\20\5\1\111\1\5\4\0\3\5\11\0\1\5\1\0"+
+    "\2\5\6\0\13\5\1\120\6\5\4\0\3\5\11\0"+
+    "\1\5\1\0\2\5\6\0\1\5\1\121\20\5\4\0"+
+    "\3\5\11\0\1\5\1\0\2\5\6\0\12\5\1\122"+
+    "\7\5\4\0\3\5\11\0\1\5\1\0\2\5\6\0"+
+    "\17\5\1\123\2\5\4\0\3\5\11\0\1\5\1\0"+
+    "\2\5\6\0\10\5\1\124\11\5\4\0\3\5\11\0"+
+    "\1\5\1\0\2\5\6\0\10\5\1\125\11\5\4\0"+
+    "\3\5\11\0\1\5\1\0\2\5\6\0\2\5\1\126"+
+    "\17\5\4\0\3\5\11\0\1\5\1\0\2\5\6\0"+
+    "\2\5\1\127\17\5\4\0\3\5\11\0\1\5\1\0"+
+    "\2\5\6\0\10\5\1\130\11\5\4\0\3\5\11\0"+
+    "\1\5\1\0\2\5\6\0\17\5\1\131\2\5\4\0"+
+    "\3\5\11\0\1\5\1\0\2\5\6\0\6\5\1\132"+
+    "\13\5\4\0\3\5\11\0\1\5\1\0\2\5\6\0"+
+    "\2\5\1\133\17\5\4\0\3\5\11\0\1\5\1\0"+
+    "\2\5\6\0\14\5\1\134\5\5\4\0\3\5\11\0"+
+    "\1\5\1\0\2\5\6\0\10\5\1\135\11\5\4\0"+
+    "\3\5\11\0\1\5\1\0\2\5\6\0\2\5\1\136"+
+    "\17\5\4\0\3\5\10\0";
 
   private static int [] zzUnpackTrans() {
-    int [] result = new int[2464];
+    int [] result = new int[2640];
     int offset = 0;
     offset = zzUnpackTrans(ZZ_TRANS_PACKED_0, offset, result);
     return result;
@@ -238,10 +244,10 @@ class Lexer {
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
     "\1\0\1\11\1\1\1\11\1\1\1\11\2\1\1\11"+
     "\14\1\4\11\2\1\1\11\2\1\4\11\1\0\1\1"+
-    "\1\0\21\1\2\11\1\1\1\0\37\1";
+    "\1\0\23\1\2\11\1\1\1\0\42\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[89];
+    int [] result = new int[94];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -678,59 +684,59 @@ class Lexer {
             }
           case 36: break;
           case 2: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.NUM_LIT;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.NUM_LIT;
             }
           case 37: break;
           case 3: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.DOT    ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.DOT    ;
             }
           case 38: break;
           case 4: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.IDENT  ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.IDENT  ;
             }
           case 39: break;
           case 5: 
-            { System.out.println(); lineno++; column = 1;
+            { lineno++; column = 1;
             }
           case 40: break;
           case 6: 
-            { System.out.print(" "); column++;
+            { column += yytext().length();
             }
           case 41: break;
           case 7: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.TERMOP ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.TERMOP ;
             }
           case 42: break;
           case 8: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.LPAREN ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.LPAREN ;
             }
           case 43: break;
           case 9: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.RPAREN ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.RPAREN ;
             }
           case 44: break;
           case 10: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.LBRACKET;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.LBRACKET;
             }
           case 45: break;
           case 11: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.RBRACKET;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.RBRACKET;
             }
           case 46: break;
           case 12: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.RELOP  ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.RELOP  ;
             }
           case 47: break;
           case 13: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.EXPROP ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.EXPROP ;
             }
           case 48: break;
           case 14: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.SEMI   ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.SEMI   ;
             }
           case 49: break;
           case 15: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.COMMA  ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.COMMA  ;
             }
           case 50: break;
           case 16: 
@@ -738,79 +744,79 @@ class Lexer {
             }
           case 51: break;
           case 17: 
-            { update_col(); /* skip */
+            { /* skip */
             }
           case 52: break;
           case 18: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.IF     ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.IF     ;
             }
           case 53: break;
           case 19: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.TYPEOF ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.TYPEOF ;
             }
           case 54: break;
           case 20: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.ASSIGN ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.ASSIGN ;
             }
           case 55: break;
           case 21: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.NUM    ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.NUM    ;
             }
           case 56: break;
           case 22: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.NEW    ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.NEW    ;
             }
           case 57: break;
           case 23: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.VAR    ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.VAR    ;
             }
           case 58: break;
           case 24: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.END    ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.END    ;
             }
           case 59: break;
           case 25: 
-            { update_line_and_col(); /* skip */
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.FUNC   ;
             }
           case 60: break;
           case 26: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.FUNC   ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.VOID   ;
             }
           case 61: break;
           case 27: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.VOID   ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.BOOL   ;
             }
           case 62: break;
           case 28: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.BOOL   ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.ELSE   ;
             }
           case 63: break;
           case 29: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.ELSE   ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.BOOL_LIT;
             }
           case 64: break;
           case 30: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.THEN   ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.THEN   ;
             }
           case 65: break;
           case 31: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.SIZE   ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.SIZE   ;
             }
           case 66: break;
           case 32: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.BEGIN  ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.BEGIN  ;
             }
           case 67: break;
           case 33: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.PRINT  ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.PRINT  ;
             }
           case 68: break;
           case 34: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.WHILE  ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.WHILE  ;
             }
           case 69: break;
           case 35: 
-            { parser.yylval = new ParserVal((Object)yytext()); return Parser.RETURN ;
+            { parser.yylval = new ParserVal((Object)yytext()); column += yytext().length(); return Parser.RETURN ;
             }
           case 70: break;
           default:

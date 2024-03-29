@@ -38,7 +38,7 @@ public class Parser
     public static final int BOOL_LIT    = 40;
 
     private String token2string(int t) {
-        String tokenVal = _token.attr.obj.toString();
+        String tokenVal = _token.attr.obj.toString().trim();
         switch (t) {
             case FUNC       : return "\"func\"";
             case VAR        : return "\"var\"";
@@ -60,19 +60,11 @@ public class Parser
             case NEW        : return "\"new\"";
             case SIZE       : return "\"size\"";
             case ASSIGN     : return "\":=\"";
-            /*case IDENT      :
-            case NUM_LIT    :
-            case BOOL_LIT   :
-            case RELOP      :
-            case EXPROP     :
-            case TERMOP     : return tokenVal;*/
             case TYPEOF     : return "\"::\"";
             case SEMI       : return "\";\"";
             case COMMA      : return "\",\"";
             case DOT        : return "\".\"";
-/*            case NUM_LIT    : return "an integer";
-            case BOOL_LIT   : return "an boolean";*/
-            default         : return "\"" + tokenVal + "\"";
+            default         : return "\"" + tokenVal.trim() + "\"";
         }
     }
     public class Token
@@ -127,11 +119,11 @@ public class Parser
 
         return lexeme;
     }
-    public String getPos() {
+    /*public String getPos() {
         int col = _lexer.column - (yylval.obj.toString().length());
         int line = _lexer.lineno;
         return "" + line + ":" + col;
-    }
+    }*/
 
     public int yyparse() throws Exception
     {
@@ -232,12 +224,12 @@ public class Parser
             case BOOL:
             {
                 String v1 = Match(BOOL);
-                return new ParseTree.PrimTypeNum();
+                return new ParseTree.PrimTypeBool();
             }
             case VOID:
             {
                 String v1 = Match(VOID);
-                return new ParseTree.PrimTypeNum();
+                return new ParseTree.PrimTypeVoid();
             }
         }
         throw new Exception("No matching production in prim_type at " + _lexer.lineno + ":" + _lexer.column + ".");
@@ -256,7 +248,7 @@ public class Parser
         }
         throw new Exception("No matching production in params at " + _lexer.lineno + ":" + _lexer.column + ".");
     }
-    public ParseTree.LocalDecl local_decl() throws Exception { //MAYBE NEEDS SWITCH
+    public ParseTree.LocalDecl local_decl() throws Exception {
         //    local_decl -> VAR IDENT TYPEOF type_spec SEMI
 
         switch(_token.type) {
@@ -316,14 +308,18 @@ public class Parser
         //    stmt_list -> stmt_list'
 
         switch(_token.type) {
-            case IDENT:
             case PRINT:
             case IF:
             case WHILE:
             case BEGIN:
-            case END:
             case RETURN:
+            case ELSE:
+            case END:
+            case IDENT:
                 return stmt_list_();
+            /*case END:
+            case ELSE:
+                return null;*/
         }
         throw new Exception("No matching production in stmt_list at " + _lexer.lineno + ":" + _lexer.column + ".");
     }
@@ -495,13 +491,13 @@ public class Parser
         }
         throw new Exception("No matching production in expr' at " + _lexer.lineno + ":" + _lexer.column + ".");
     }
-    public ParseTree.Factor factor() throws Exception {                 //NEEDS TO INCLUDE LEFT BRACKET
+    public ParseTree.Factor factor() throws Exception {
         // factor -> IDENT factor'| LPAREN expr RPAREN| NUM_LIT
 
         switch(_token.type) {
             case IDENT:
                 String v01 = Match(IDENT);
-                ParseTree.Factor_ v02 = factor_(); //NOT WORKING
+                ParseTree.Factor_ v02 = factor_();
                 return new ParseTree.FactorIdentExt(v01, v02);
             case LPAREN:
                 String v03 = Match(LPAREN);
@@ -621,7 +617,7 @@ public class Parser
 
         switch(_token.type) {
             case IDENT:
-            case RPAREN: //INCONSISTENT WITH PARSING TABLE
+            //case RPAREN: //INCONSISTENT WITH PARSING TABLE
                 String v01 = Match(IDENT);
                 String v02 = Match(TYPEOF);
                 ParseTree.TypeSpec v03 = type_spec();
@@ -663,7 +659,7 @@ public class Parser
             case NUM:
             case BOOL:
             case VOID:
-            case RPAREN:
+            //case RPAREN:
                 ParseTree.PrimType v01 = prim_type();
                 ParseTree.TypeSpec_ v02 = type_spec_();
                 return new ParseTree.TypeSpec(v01,v02);
