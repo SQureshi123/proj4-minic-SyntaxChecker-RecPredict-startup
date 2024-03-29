@@ -154,7 +154,7 @@ public class ParseTree
             this.ident = ident;
             this.expr  = expr ;
         }
-        public String[] ToStringList() throws Exception 
+        public String[] ToStringList() throws Exception
         {
             String str = ident;
             str  += " := " + expr.ToString() + ";";
@@ -171,9 +171,9 @@ public class ParseTree
         public String[] ToStringList() throws Exception
         {
             return new String[]
-            {
-                "print " + expr.ToString() + ";"
-            };
+                    {
+                            "print " + expr.ToString() + ";"
+                    };
         }
     }
     public static class StmtReturn extends Stmt
@@ -186,9 +186,9 @@ public class ParseTree
         public String[] ToStringList() throws Exception
         {
             return new String[]
-            {
-                "return " + expr.ToString() + ";"
-            };
+                    {
+                            "return " + expr.ToString() + ";"
+                    };
         }
     }
     public static class StmtIf extends Stmt

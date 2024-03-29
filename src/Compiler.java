@@ -9,13 +9,13 @@ public class Compiler
     public void Compile() throws Exception
     {
         int parseresult = parser.yyparse();
-            // parser.yyparse()
-            // 1. parses the input
-            // 2. assigns parser._parsetree the parse tree
-            // 3. return 0 (indicating success)
-            // 4. if syntax error occurs,
-            //    assign parser._errormsg the error message
-            //    and return -1
+        // parser.yyparse()
+        // 1. parses the input
+        // 2. assigns parser._parsetree the parse tree
+        // 3. return 0 (indicating success)
+        // 4. if syntax error occurs,
+        //    assign parser._errormsg the error message
+        //    and return -1
 
         if(parseresult == 0)
         {
