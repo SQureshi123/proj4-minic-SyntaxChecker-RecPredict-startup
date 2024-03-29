@@ -13,4 +13,4 @@ java -jar jflex-1.6.1.jar Lexer.flex
 
 5. run program and capture its output as follows:
 
-java Program test1.minc > solu1.txt
+java Program fail_01.min  > output_fail_01.txt
